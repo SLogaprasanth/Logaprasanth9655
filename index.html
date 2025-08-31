@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Products India - Smart TVs with Indian Pricing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .inr-price {
+            font-feature-settings: 'lnum' 1;
+            font-variant-numeric: lining-nums;
+        }
+        
+        .tv-card {
+            background: linear-gradient(145deg, #1e293b 0%, #334155 100%);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+        
+        .tv-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .tv-image {
+            transition: all 0.5s ease;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+        }
+        
+        .tv-card:hover .tv-image {
+            transform: scale(1.05);
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .spec-item {
+            background: rgba(99, 102, 241, 0.15);
+            padding: 0.75rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .model-badge {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .size-badge {
+            background: linear-gradient(135deg, #10b981, #34d399);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .indian-flag {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #FF5722 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .nav-item {
+            position: relative;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-item.active {
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+        }
+        
+        .nav-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .tech-badge {
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+        }
+        
+        .offer-tag {
+            background: linear-gradient(135deg, #ef4444, #f87171);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-700/30">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-tv text-white text-lg"></i>
+                    </div>
+                    <h1 class="text-xl font-semibold">TV Products India</h1>
+                    <span class="indian-flag"></span>
+                </div>
+                
+                <nav class="hidden md:flex items-center space-x-2 bg-slate-800/30 rounded-full p-1">
+                    <button class="nav-item active" data-category="all">All TVs</button>
+                    <button class="nav-item" data-category="smart">Smart TVs</button>
+                    <button class="nav-item" data-category="oled">OLED</button>
+                    <button class="nav-item" data-category="qled">QLED</button>
+                    <button class="nav-item" data-category="4k">4K Ultra HD</button>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="p-3 rounded-full hover:bg-slate-700/30 transition-colors">
+                        <i class="fas fa-search text-purple-300"></i>
+                    </button>
+                    <button class="p-3 rounded-full hover:bg-slate-700/30 transition-colors">
+                        <i class="fas fa-shopping-cart text-purple-300"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden">
+        <div class="container mx-auto px-4 py-20 text-center">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-5xl md:text-7xl font-bold mb-6 gradient-text">Premium TV Collection</h2>
+                <p class="text-xl text-slate-300 mb-8">Experience the future of entertainment with our cutting-edge television technology</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-full font-semibold transition-colors transform hover:scale-105">
+                        <i class="fas fa-rupee-sign mr-2"></i>View Prices
+                    </button>
+                    <button class="border border-purple-500/30 text-white px-8 py-4 rounded-full font-semibold hover:bg-purple-600/20 transition-colors">
+                        Compare Models
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Animated background elements -->
+        <div class="absolute top-0 left-0 w-full h-full -z-10">
+            <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute top-1/2 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl"></div>
+        </div>
+    </section>
+
+    <!-- TV Products Grid -->
+    <main class="container mx-auto px-4 py-16">
+        <div class="text-center mb-16">
+            <h3 class="text-4xl font-bold mb-4">TV Products Collection</h3>
+            <p class="text-slate-300 max-w-3xl mx-auto">Discover our range of premium televisions with stunning picture quality and smart features</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="tv-grid">
+            <!-- Smart TV 1 -->
+            <div class="tv-card fade-in" data-category="smart">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h4 class="text-2xl font-bold">Samsung Crystal 4K</h4>
+                            <p class="text-slate-300">Smart TV</p>
+                        </div>
+                        <span class="model-badge">BEST SELLER</span>
+                    </div>
+                    
+                    <div class="relative h-48 mb-6 flex items-center justify-center bg-slate-800/50 rounded-xl">
+                        <img src="https://placehold.co/400x300" alt="Samsung Crystal 4K Smart TV with ultra-thin bezel, crystal display technology, and sleek stand design" class="tv-image h-40 object-contain" />
+                    </div>
+                    
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <i class="fas fa-tv text-purple-400 mb-1"></i>
+                            <p class="text-xs">55 inch</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-hd text-purple-400 mb-1"></i>
+                            <p class="text-xs">4K UHD</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-wifi text-purple-400 mb-1"></i>
+                            <p class="text-xs">Smart TV</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <p class="text-2xl font-bold inr-price">₹54,999</p>
+                            <span class="offer-tag">15% OFF</span>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-4"><s>₹64,999</s> • Free Installation</p>
+                        
+                        <button class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OLED TV -->
+            <div class="tv-card fade-in" data-category="oled">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h4 class="text-2xl font-bold">LG OLED C3</h4>
+                            <p class="text-slate-300">OLED TV</p>
+                        </div>
+                        <span class="size-badge">65"</span>
+                    </div>
+                    
+                    <div class="relative h-48 mb-6 flex items-center justify-center bg-slate-800/50 rounded-xl">
+                        <img src="https://placehold.co/400x300" alt="LG OLED C3 television with perfect black levels, infinite contrast, and premium gallery design" class="tv-image h-40 object-contain" />
+                    </div>
+                    
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <i class="fas fa-bolt text-purple-400 mb-1"></i>
+                            <p class="text-xs">OLED</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-gamepad text-purple-400 mb-1"></i>
+                            <p class="text-xs">120Hz</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-volume-up text-purple-400 mb-1"></i>
+                            <p class="text-xs">AI Sound</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <p class="text-2xl font-bold inr-price">₹1,49,999</p>
+                            <span class="tech-badge">α9 Processor</span>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-4">Premium OLED Technology</p>
+                        
+                        <button class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QLED TV -->
+            <div class="tv-card fade-in" data-category="qled">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h4 class="text-2xl font-bold">Samsung Q80C</h4>
+                            <p class="text-slate-300">QLED TV</p>
+                        </div>
+                        <span class="model-badge">QUANTUM</span>
+                    </div>
+                    
+                    <div class="relative h-48 mb-6 flex items-center justify-center bg-slate-800/50 rounded-xl">
+                        <img src="https://placehold.co/400x300" alt="Samsung Q80C QLED TV with quantum dot technology, direct full array lighting, and sleek minimalist design" class="tv-image h-40 object-contain" />
+                    </div>
+                    
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <i class="fas fa-sun text-purple-400 mb-1"></i>
+                            <p class="text-xs">QLED</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-certificate text-purple-400 mb-1"></i>
+                            <p class="text-xs">4K QLED</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-microchip text-purple-400 mb-1"></i>
+                            <p class="text-xs">Quantum HDR</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <p class="text-2xl font-bold inr-price">₹89,999</p>
+                            <span class="offer-tag">12% OFF</span>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-4"><s>₹1,02,000</s> • Free Wall Mount</p>
+                        
+                        <button class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Budget Smart TV -->
+            <div class="tv-card fade-in" data-category="smart">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h4 class="text-2xl font-bold">Mi TV 5X</h4>
+                            <p class="text-slate-300">Android TV</p>
+                        </div>
+                        <span class="size-badge">43"</span>
+                    </div>
+                    
+                    <div class="relative h-48 mb-6 flex items-center justify-center bg-slate-800/50 rounded-xl">
+                        <img src="https://placehold.co/400x300" alt="Mi TV 5X Android TV with bezel-less design, patchwall interface, and affordable pricing" class="tv-image h-40 object-contain" />
+                    </div>
+                    
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <i class="fab fa-android text-purple-400 mb-1"></i>
+                            <p class="text-xs">Android</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-hd text-purple-400 mb-1"></i>
+                            <p class="text-xs">4K Ready</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-volume-up text-purple-400 mb-1"></i>
+                            <p class="text-xs">Dolby Audio</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <p class="text-2xl font-bold inr-price">₹32,999</p>
+                            <span class="offer-tag">BUDGET</span>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-4">Best Value Smart TV</p>
+                        
+                        <button class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Premium OLED -->
+            <div class="tv-card fade-in" data-category="oled">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h4 class="text-2xl font-bold">Sony A95L</h4>
+                            <p class="text-slate-300">QD-OLED TV</p>
+                        </div>
+                        <span class="model-badge">FLAGSHIP</span>
+                    </div>
+                    
+                    <div class="relative h-48 mb-6 flex items-center justify-center bg-slate-800/50 rounded-xl">
+                        <img src="https://placehold.co/400x300" alt="Sony A95L QD-OLED TV with cognitive processor XR, acoustic surface audio+, and premium design" class="tv-image h-40 object-contain" />
+                    </div>
+                    
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <i class="fas fa-star text-purple-400 mb-1"></i>
+                            <p class="text-xs">QD-OLED</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-brain text-purple-400 mb-1"></i>
+                            <p class="text-xs">Cognitive XR</p>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-film text-purple-400 mb-1"></i>
+                            <p class="text-xs">Netflix Calibrated</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <p class="text-2xl font-bold inr-price">₹2,79,999</p>
+                            <span class="tech-badge">MASTER Series</span>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-4">Ultimate Picture Quality</p>
+                        
+                        <button class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold transition-colors">
+                            <i class="fas fa-shopping-cart mr-2"></i>Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gaming TV -->
+            <div class="tv-card fade-in" data-category="4k">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h4 class="text-2xl font-bold">LG G3</h4>
+                            <p class="text-slate-300">Gaming OLED</p>
+                        </div>
+                        <span class="size-badge">77"</span>
+                    </div>
+                    
+                    <div class="relative h-48 mb-6 flex items-center justify-center bg-slate-
